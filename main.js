@@ -35,12 +35,11 @@ client.on("message", (message) => {
   //プレフィックスがなかった場合には実行しない
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
+  //文字を全て小文字に
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (command === "clear") {
-    client.commands.get("clear").execute(message, args);
-  } else if (command === "play") {
+  if (command === "play") {
     client.commands.get("play").execute(message, args);
   } else if (command === "leave") {
     client.commands.get("leave").execute(message, args);

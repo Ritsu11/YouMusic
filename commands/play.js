@@ -1,5 +1,5 @@
 const ytdl = require("ytdl-core");
-const ytSearch = require("ytdl-search");
+const ytSearch = require("yt-search");
 
 module.exports = {
   name: "play",
@@ -14,17 +14,40 @@ module.exports = {
       );
     }
 
+    //権限があるか確認
     const permissions = voiceChannel.permissionsFor(message.client.user);
 
-    //権限があるか確認
-    if (!permissions.has("CONNECT")) {
+    if (!permissions.has("CONNECT"))
       return message.channel.send("接続権限がありません");
-    }
-    if (!permissions.has("SPEAK")) {
+    if (!permissions.has("SPEAK"))
       return message.channel.send("発言権限がありません");
-    }
-    if (!args.length) {
-      return message.channel.send("URLを指定してください");
+    if (!args.length) return message.channel.send("URLを指定してください");
+
+    //URLバリデーション
+    const validURL = (str) => {
+      let regex =
+        /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+
+      if (!regex.test(str)) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    //途中で指定された場合強制終了、新たなのを再生
+    if (validURL(args[0])) {
+      const connection = await voiceChannel.join();
+      const stream = ytdl(args[0], { filte: "audioonly" });
+
+      connection.play(stream, { seek: 0, volume: 1 }).on("finish", () => {
+        voiceChannel.leave();
+        message.channel.send("チャンネルから退出");
+      });
+
+      await message.reply(`:thumbsup: ${video.title} を再生中`);
+
+      return;
     }
 
     const connection = await voiceChannel.join();
@@ -44,6 +67,7 @@ module.exports = {
 
       //音量設定と再生停止
       connection.play(stream, { seek: 0, volume: 1 }).on("finish", () => {
+        //再生終了後強制退出
         voiceChannel.leave();
       });
 
