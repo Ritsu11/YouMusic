@@ -37,6 +37,8 @@ module.exports = {
 
     //途中で指定された場合強制終了、新たなのを再生
     if (validURL(args[0])) {
+      message.channel.send("不正なURL");
+
       const connection = await voiceChannel.join();
       const stream = ytdl(args[0], { filte: "audioonly" });
 
