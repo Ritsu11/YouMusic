@@ -8,6 +8,6 @@ module.exports = {
 
     //チャンネルから退出させる
     await voiceChannel.leave();
-    await message.channel.send("チャンネルから退出しました 🤗");
+    await message.channel.send("チャンネルから退出しました ");
   },
 };

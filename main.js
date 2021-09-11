@@ -6,7 +6,7 @@ const fs = require("fs");
 // Discord Clientのインスタンス作成
 const client = new Discord.Client();
 // トークンの用意
-const token = "ODU1NjcxNzc3NzQ1MzA1NjMx.YM14cQ.sef0oDaM4ETRVPxBHc7iJ2NvqC8";
+const token = "ODU1NjcxNzc3NzQ1MzA1NjMx.YM14cQ.z-dOCq4MxGmG5fOqt5onc0a5XTg";
 
 //プレフィックス設定
 const prefix = "-";
