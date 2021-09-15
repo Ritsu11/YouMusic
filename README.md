@@ -13,4 +13,5 @@ https://discord.com/oauth2/authorize?client_id=855671777745305631&scope=bot&perm
 # Version
 
 Discord.js: 3.0.1
+
 Version: 1.0.0
