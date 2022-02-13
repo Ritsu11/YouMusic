@@ -1,6 +1,6 @@
 # YouMusic DiscordBot
 
-自作音楽ボット
+vanillajsで作成した自作音楽ボット
 
 # 導入手順
 
